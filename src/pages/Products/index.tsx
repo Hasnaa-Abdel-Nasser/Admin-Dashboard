@@ -1,31 +1,60 @@
 import { BadgePlus } from "lucide-react";
-import './index.css'
+import "./index.css";
 import ProductCard from "../../components/ui/Card";
+import useGetData from "../../hooks/useGetData";
+import { IProduct } from "../../interfaces";
+import NewProductModal from "../../components/Modals/NewProduct";
+import { useState } from "react";
+import EditProductModal from "../../components/Modals/EditProduct";
+
 const ProductsPage = () => {
-  const product = {
-      "id": 1,
-      "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-      "price": 109.95,
-      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-      "category": "men's clothing",
-      "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-      "rating": {
-        "rate": 3.9,
-        "count": 120
-      }
-  }
+  const [showAddProductModal, setShowAddProductModal] = useState(false);
+  const [showEditProductModal, setShowEditProductModal] = useState(false);
+  const [productSelected, setProductSelected] = useState({
+    id: 0,
+    title: "",
+    description: "",
+    category: "",
+    image: "",
+    price: 1,
+  });
+  const { isLoading, data } = useGetData({
+    queryKey: ["products"],
+    url: "products",
+  });
+
   return (
     <div className="page">
-      <div className='flex justify-between w-full'>
+      <div className="flex justify-between w-full">
         <p className="text-lg font-medium">Products</p>
-        <button className="bg-[#44A5FF] text-sm font-medium p-2 rounded-md flex gap-2">
+        <button className="bg-[#44A5FF] text-sm font-medium p-2 rounded-md flex gap-2" onClick={() => setShowAddProductModal(true)}>
           <BadgePlus size={20} strokeWidth={1.75} />
-          Add New Product
+          Add new product
         </button>
       </div>
-      <div className='cards relative my-5 text-start flex flex-wrap'>
-        <ProductCard product={product}/>
-      </div>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <div className="cards my-5 text-start flex flex-wrap justify-evenly">
+          {data.map((product: IProduct) => (
+            <ProductCard
+              product={product}
+              key={product.id}
+              setOpen={setShowEditProductModal}
+              setProduct={setProductSelected}
+            />
+          ))}
+        </div>
+      )}
+      {showAddProductModal ? (
+        <NewProductModal setOpen={setShowAddProductModal} />
+      ) : null}
+      {showEditProductModal ? (
+        <EditProductModal
+          setOpen={setShowEditProductModal}
+          product={productSelected}
+        />
+      ) : null}
     </div>
   );
 };
