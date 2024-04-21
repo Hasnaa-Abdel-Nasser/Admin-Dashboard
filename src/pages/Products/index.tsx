@@ -4,20 +4,28 @@ import ProductCard from "../../components/ui/Card";
 import useGetData from "../../hooks/useGetData";
 import { IProduct } from "../../interfaces";
 import NewProductModal from "../../components/Modals/NewProduct";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EditProductModal from "../../components/Modals/EditProduct";
+import DeleteProduct from "../../components/Modals/DeleteProduct";
+import { initProduct } from "../../utils";
+import { Toaster } from "react-hot-toast";
 
 const ProductsPage = () => {
-  const [showAddProductModal, setShowAddProductModal] = useState(false);
-  const [showEditProductModal, setShowEditProductModal] = useState(false);
-  const [productSelected, setProductSelected] = useState({
-    id: 0,
-    title: "",
-    description: "",
-    category: "",
-    image: "",
-    price: 1,
-  });
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [productSelected, setProductSelected] = useState(initProduct);
+
+  useEffect(()=>{
+    const open = showAddModal || showEditModal || showDeleteModal;
+    const body = document.querySelector("body");
+
+    if (body) {
+      body.style.overflow = open ? "hidden" : "auto";
+    }
+    
+  },[showAddModal,showEditModal,showDeleteModal]);
+
   const { isLoading, data } = useGetData({
     queryKey: ["products"],
     url: "products",
@@ -27,7 +35,7 @@ const ProductsPage = () => {
     <div className="page">
       <div className="flex justify-between w-full">
         <p className="text-lg font-medium">Products</p>
-        <button className="bg-[#44A5FF] text-sm font-medium p-2 rounded-md flex gap-2" onClick={() => setShowAddProductModal(true)}>
+        <button className="bg-[#44A5FF] text-sm font-medium p-2 rounded-md flex gap-2" onClick={() => setShowAddModal(true)}>
           <BadgePlus size={20} strokeWidth={1.75} />
           Add new product
         </button>
@@ -40,21 +48,29 @@ const ProductsPage = () => {
             <ProductCard
               product={product}
               key={product.id}
-              setOpen={setShowEditProductModal}
+              setOpenEditModal={setShowEditModal}
+              setOpenDeleteModal={setShowDeleteModal}
               setProduct={setProductSelected}
             />
           ))}
         </div>
       )}
-      {showAddProductModal ? (
-        <NewProductModal setOpen={setShowAddProductModal} />
+      {showAddModal ? (
+        <NewProductModal setOpen={setShowAddModal} />
       ) : null}
-      {showEditProductModal ? (
+      {showEditModal ? (
         <EditProductModal
-          setOpen={setShowEditProductModal}
+          setOpen={setShowEditModal}
           product={productSelected}
         />
       ) : null}
+      {showDeleteModal ? (
+        <DeleteProduct setOpen={setShowDeleteModal} id={productSelected.id}/>
+      ) : null}
+      <Toaster
+  position="bottom-right"
+  reverseOrder={false}
+/>
     </div>
   );
 };

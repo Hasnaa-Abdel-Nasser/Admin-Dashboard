@@ -4,10 +4,11 @@ import { Boxes, DollarSign } from "lucide-react";
 import { IProduct } from '../../interfaces';
 interface IProps{
   product:IProduct
-  setOpen: (value: boolean) => void
+  setOpenEditModal: (value: boolean) => void
+  setOpenDeleteModal: (value: boolean) => void
   setProduct: (value:IProduct) => void
 }
-const ProductCard = ({product , setOpen , setProduct}:IProps) => {
+const ProductCard = ({product , setOpenEditModal , setOpenDeleteModal , setProduct}:IProps) => {
   return (
     <>
         {
@@ -17,8 +18,8 @@ const ProductCard = ({product , setOpen , setProduct}:IProps) => {
               <div className="h-40 bg-white flex justify-center rounded-lg">
                 <img src={product.image} className="h-full"/>
                 <div className="text-[20px] absolute right-4 top-4">
-                  <button className="text-[#32cc16] bg-[#32cc164a] rounded-full p-1 mr-1" onClick={()=>{setProduct(product); setOpen(true)}}><MdEdit /></button>
-                  <button  className="text-red-500 bg-[#cc161626] rounded-full p-1"><MdDelete /></button>
+                  <button className="text-[#32cc16] bg-[#32cc164a] rounded-full p-1 mr-1" onClick={()=>{setProduct(product); setOpenEditModal(true)}}><MdEdit /></button>
+                  <button  className="text-red-500 bg-[#cc161626] rounded-full p-1" onClick={()=>{setProduct(product); setOpenDeleteModal(true)}}><MdDelete /></button>
                 </div>
               </div>
               <div className= 'my-3'>

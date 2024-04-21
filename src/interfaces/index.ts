@@ -10,3 +10,15 @@ export interface IProduct {
         count: number;
     };
 }
+
+export interface IFormInput{
+    title: string;
+    price: number;
+    description: string;
+    category: string;
+    image: string;
+}
+
+export interface IErrorResponse{
+    message:string
+}
