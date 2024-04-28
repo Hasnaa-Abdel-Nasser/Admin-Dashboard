@@ -21,3 +21,15 @@ export const productSchema = yup.object().shape({
     .required("Description is required")
     .min(3, "Description must be at least 3 characters"),
 });
+
+export const authSchema = yup.object().shape({
+  username: yup
+    .string()
+    .required("Username is required")
+    .min(3, "Username must be at least 3 characters"),
+  password: yup
+    .string()
+    .required("Password is required")
+    .min(1, "At least 8 characters in length")
+    .max(20, "Password must be between 8 to 20 characters long"),
+});

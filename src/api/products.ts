@@ -1,5 +1,5 @@
 import axiosInstance from "../config/axios.config";
-import { IFormInput, IProduct } from "../interfaces";
+import { IFormInput } from "../interfaces";
 
 export const add = async (config: IFormInput) => {
   try {
@@ -10,10 +10,9 @@ export const add = async (config: IFormInput) => {
   }
 };
 
-export const edit = async (config: IProduct) => {
+export const edit = async ({id , config}: {id:number , config:IFormInput}) => {
   try {
-    const { id, ...item } = config;
-    const { data , status} = await axiosInstance.patch(`products/${id}`, item);
+    const { data , status} = await axiosInstance.patch(`products/${id}`, config);
     return {data , status};
   } catch (error) {
     console.log(error);

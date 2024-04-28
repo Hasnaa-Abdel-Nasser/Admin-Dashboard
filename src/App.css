@@ -1,6 +1,6 @@
 #root {
   margin: 0;
-  padding: 2rem;
+  /* padding: 2rem; */
   text-align: center;
 }
 
@@ -9,4 +9,22 @@
   display: flex;
   flex-direction: column;
   align-items: start;
+}
+
+@keyframes moveClockwise {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(100px) rotate(360deg); }
+}
+
+@keyframes moveCounterclockwise {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-100px) rotate(-360deg); }
+}
+
+.animate-moveClockwise {
+  animation: moveClockwise 2s linear infinite;
+}
+
+.animate-moveCounterclockwise {
+  animation: moveCounterclockwise 4s linear infinite;
 }

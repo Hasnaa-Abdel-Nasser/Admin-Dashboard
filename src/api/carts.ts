@@ -1,9 +1,9 @@
 import axiosInstance from "../config/axios.config";
 
 
-export const productsInCategory = async(name:string)=>{
+export const  carts = async()=>{
     try {
-        const { data , status} = await axiosInstance.get(`/products/category/${name}`);
+        const { data , status} = await axiosInstance.get('carts');
         return {data , status};
       } catch (error) {
         console.log(error);

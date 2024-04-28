@@ -10,12 +10,13 @@ import { useState } from "react"
 import Spinner from "../ui/Spinner"
 import ErrorMessage from "../ui/ErrorMessage"
 import { productSchema } from "../../validation"
+import Modal from "."
 
 interface IProps{
   setOpen: (value: boolean) => void
 }
 
-const NewProductModal = ({setOpen}:IProps) => {
+const NewProductModal = ({setOpen }:IProps) => {
 
   const[submitLoad , setSubmitLoad] = useState(false)
   const {isLoading , data:categories} = useGetData({
@@ -42,8 +43,7 @@ const NewProductModal = ({setOpen}:IProps) => {
 
   return (
     <>
-      <div id="crud-modal" className=" overflow-y-auto overflow-x-hidden fixed top-0 left-0 bottom-0 flex z-50 justify-center items-center w-full md:inset-0 max-h-full bg-slate-900 bg-opacity-55 backdrop-blur-sm">
-          <div className="form relative p-4 w-full max-w-md max-h-full">
+      <Modal setOpen={setOpen}>
               <div className="relative bg-white rounded-lg shadow ">
                   <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
                       <h3 className="text-lg font-semibold text-gray-900 ">
@@ -53,11 +53,11 @@ const NewProductModal = ({setOpen}:IProps) => {
                   <form onSubmit={handleSubmit(onSubmit)} className="p-4 md:p-5 text-start">
                       <div className="grid gap-2 mb-4 grid-cols-2">
                           <div className="col-span-2">
-                            <Input {...register("title")} label="Title" placeholder="Type product title"/>
+                            <Input {...register("title")} label="Title" placeholder="Type product title" className="border-gray-300 bg-gray-50 text-gray-900"/>
                             {errors&& errors.title && <ErrorMessage message={errors.title.message}/>}
                           </div>
                           <div className="col-span-2 sm:col-span-1">
-                            <Input {...register("price")} label="Price" type="number" step={0.50} defaultValue={1}/>
+                            <Input {...register("price")} label="Price" type="number" step={0.50} defaultValue={1} className="border-gray-300 bg-gray-50 text-gray-900"/>
                             {errors&& errors.price && <ErrorMessage message={errors.price.message}/>}
                           </div>
                           <div className="col-span-2 sm:col-span-1">
@@ -73,7 +73,7 @@ const NewProductModal = ({setOpen}:IProps) => {
                               {errors&& errors.category && <ErrorMessage message={errors.category.message}/>}
                           </div>
                           <div className="col-span-2">
-                            <Input {...register("image")} label="Image"placeholder="Type image URL"/>
+                            <Input {...register("image")} label="Image"placeholder="Type image URL" className="border-gray-300 bg-gray-50 text-gray-900"/>
                             {errors&& errors.image && <ErrorMessage message={errors.image.message}/>}
                           </div>
                           <div className="col-span-2">
@@ -82,7 +82,7 @@ const NewProductModal = ({setOpen}:IProps) => {
                               {errors&& errors.description && <ErrorMessage message={errors.description.message}/>}
                           </div>
                       </div>
-                      <div className={`mr-3 text-white inline-flex items-center bg-[#44A5FF] hover:bg-[#4492ff] focus:outline-nonefont-medium rounded-lg text-sm px-5 py-2.5 text-center`}>
+                      <div className={`mr-3 text-white inline-flex items-center bg-[#1fcec8] hover:bg-[#56c1bd] focus:outline-nonefont-medium rounded-lg text-sm px-5 py-2.5 text-center`}>
                         {submitLoad && <Spinner/>}
                         <input type="submit"/>
                       </div>
@@ -91,8 +91,7 @@ const NewProductModal = ({setOpen}:IProps) => {
                       </button>
                   </form>
               </div>
-          </div>
-      </div> 
+         </Modal>
     </>
   )
 }

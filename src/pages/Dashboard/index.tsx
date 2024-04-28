@@ -2,6 +2,7 @@ import Card, { IProps } from "../../components/ui/DashboardCards";
 import { cardsData } from "../../utils/dashboard.cards";
 import BasicTable from '../../components/Table'
 const DashboardPage = () => {
+
   return (
     <div className="page">
       <p className="text-lg font-medium">Dashboard</p>
