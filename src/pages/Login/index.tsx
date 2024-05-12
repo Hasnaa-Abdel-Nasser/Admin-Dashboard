@@ -24,14 +24,16 @@ const Login = () => {
   };
 
   return (
-    <div className="background-style">
-      <div className="shadow-[0_0_8px_0] md:max-w-lg h-96 w-80 m-6 rounded-xl p-6 bg-transparent">
+    <div className="flex justify-center items-center h-screen relative">
+      <div className="background-style"></div>
+      <div className="fixed z-1 shadow-[0_0_8px_0] md:max-w-lg h-96 w-80 m-6 rounded-xl p-6 bg-transparent">
         <p className="text-2xl font-medium">Welcome Back!</p>
         <p className="text-xs text-gray-300">Login to continue</p>
         <form className="flex flex-col text-start mt-10" onSubmit={handleSubmit(onSubmit)}>
           <Input
             className="bg-transparent border-gray"
             placeholder="Username"
+            defaultValue={"mor_2314"}
             {...register("username")}
           />
           {errors&& errors.username && <ErrorMessage message={errors.username.message}/>}
@@ -39,6 +41,7 @@ const Login = () => {
             <Input
               className="w-full mt-6 bg-transparent border-gray"
               placeholder="Password"
+              defaultValue={"83r5^_"}
               type={hidePassword?'password':'text'}
               {...register("password")}
             />

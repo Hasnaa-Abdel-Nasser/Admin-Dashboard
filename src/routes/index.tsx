@@ -12,7 +12,6 @@ import Login from "../pages/Login";
 import ProdectedRoute from "../components/ProdectedRoute";
 
 const userToken = localStorage.getItem("token") || sessionStorage.getItem("token");
-console.log(userToken)
 const isLogin = userToken ? true : false;
 
 export const router = createBrowserRouter(

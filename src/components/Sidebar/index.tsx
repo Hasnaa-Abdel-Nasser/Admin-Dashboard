@@ -1,6 +1,7 @@
-import { LucideArrowLeft, Boxes, LayoutGrid, ShoppingBasket, LucideArrowRight } from "lucide-react";
+import { LucideArrowLeft, Boxes, LayoutGrid, ShoppingBasket, LucideArrowRight , LogOut} from "lucide-react";
 import "./index.css";
 import { NavLink } from "react-router-dom";
+import { logout } from "../../utils";
 interface IProps{
   open: boolean
   setOpen: (value: boolean) => void
@@ -9,11 +10,10 @@ const Sidebar = ({ open, setOpen } : IProps) => {
   return (
     <div className={`bg-[#2A2D3E] h-[100vh] fixed z-20 top-0 left-0 ease-out duration-700 w-[${open?'200px':'70px'}]`}>
       {
-        open ? <img src="/images/logo.png" alt="logo" className="w-[200px]" />
-        : <img src="/images/icon.png" alt="logo" className="w-[65px]" />
+        open ? <img src="/images/logo.png" alt="logo" className="w-[170px] m-auto" />
+        : <img src="/images/icon.png" alt="logo" className="w-[65px] mx-auto mt-2" />
       }
       <ul className='py-5'>
-        <li>
           <NavLink to="/" className="buttons">
             <LayoutGrid size={30} /> 
             {open ? "Dashboard" : ""}
@@ -30,7 +30,12 @@ const Sidebar = ({ open, setOpen } : IProps) => {
               {open ? "Categories" : ""}
             </NavLink>
           </li>
-        </li>
+          <li>
+            <button className="buttons" onClick={()=>logout()}>
+              <LogOut size={30} strokeWidth={2.5}/> 
+              {open ? "Logout" : ""}
+            </button>
+          </li>
       </ul>
       <div className="relative px-6 mt-10">
         <hr />

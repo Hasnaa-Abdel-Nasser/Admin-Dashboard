@@ -9,7 +9,7 @@ const Layout = () => {
     <>
       <Header/>
       <Sidebar open={open} setOpen={setOpen} />
-      <div style={{ marginLeft: open ? "200px" : "70px" , width: open ? "85%" : "95%"}}>
+      <div className='mt-12 flex flex-col items-start p-8' style={{ marginLeft: open ? "200px" : "70px"}}>
         <Outlet />
       </div>
     </>

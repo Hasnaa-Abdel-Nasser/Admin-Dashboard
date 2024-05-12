@@ -10,7 +10,7 @@ interface IProps {
 const SingleProduct = ({ setOpen, product }: IProps) => {
   return (
     <Modal setOpen={setOpen}>
-      <div className="flex flex-col bg-white border border-gray-200 rounded-lg shadow md:max-w-md p-2 relative">
+      <div className="flex flex-col bg-white border border-gray-200 rounded-lg shadow md:max-w-md p-2 relative m-8">
         <div className="flex justify-center rounded-t-lg h-56 md:p-4 p-2">
           <img className="h-full" src={product.image} />
           <button className="absolute top-3 right-3" onClick={() => setOpen(false)}>

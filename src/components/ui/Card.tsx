@@ -22,7 +22,7 @@ const ProductCard = ({ product }: { product: IProduct }) => {
   return (
     <>
       {product.id && (
-        <div className="mb-8">
+        <div>
           <div className="w-64 bg-[#2A2D3E] p-3 rounded-2xl card relative">
             <div className="h-40 bg-white flex justify-center rounded-lg">
               <img src={product.image} className="h-full" />
@@ -63,14 +63,12 @@ const ProductCard = ({ product }: { product: IProduct }) => {
                 <DollarSign size={16} /> {product.price}
               </p>
             </div>
-            <div className="w-full h-8">
               <button
                 onClick={() => setShowProduct(true)}
-                className="bg-[#1fcec8] w-full h-full rounded-lg font-semibold text-sm"
+                className="bg-darkGray hover:bg-primary w-full h-8 rounded-lg font-semibold text-sm transition-all duration-300"
               >
                 Read more
               </button>
-            </div>
           </div>
         </div>
       )}

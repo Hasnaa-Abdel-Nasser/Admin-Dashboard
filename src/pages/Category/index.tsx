@@ -5,6 +5,7 @@ import { AxiosError } from "axios";
 import { IErrorResponse, IProduct } from "../../interfaces";
 import ProductCard from "../../components/ui/Card";
 import { Toaster } from "react-hot-toast";
+import Spinner from "../../components/ui/Spinner";
 
 const CategoriesPage = () => {
   const { isLoading, data: categories } = useGetData({
@@ -38,20 +39,20 @@ const CategoriesPage = () => {
   }, [categories]);
 
   return (
-    <div className="page">
+    <div className="w-full">
       <p className="text-lg font-medium">Categories</p>
       <div>
         {isLoading ? (
-          <p>Loading</p>
+          <></>
         ) : (
-          <ul className="text-xs flex m-3">
+          <ul className="text-xs flex ml-1 my-5">
             {categories.map((category: string) => (
-              <li
+              <li key={category}
                 onClick={() => handleProducts(category)}
                 className={`${
                   activeCategory === category &&
-                  "bg-[#1fcec8] bg-opacity-25 text-[#1fcec8] "
-                } text-gray-500 mr-2 hover:text-[#1fcec8] cursor-pointer w-fit p-2 rounded-md hover:bg-[#1fcec8] hover:bg-opacity-25`}
+                  "bg-primary bg-opacity-25 text-primary"
+                } text-gray-400 mr-2 hover:text-primary cursor-pointer w-fit p-2 rounded-md hover:bg-primary hover:bg-opacity-25`}
               >
                 {category}
               </li>
@@ -61,9 +62,9 @@ const CategoriesPage = () => {
       </div>
       <div>
         {isLoadingProducts ? (
-          <p>LOading</p>
+          <Spinner/>
         ) : (
-          <div className="cards text-start flex flex-wrap gap-3 justify-around md:justify-start">
+          <div className="flex flex-wrap gap-5 2xl:justify-start md:justify-evenly my-5 max-sm:justify-center">
             {products.map((product: IProduct) => (
               <ProductCard product={product} key={product.id} />
             ))}

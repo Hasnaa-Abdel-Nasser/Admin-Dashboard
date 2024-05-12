@@ -7,7 +7,6 @@ import { AxiosError } from "axios"
 import useGetData from "../../hooks/useGetData"
 import toast from "react-hot-toast"
 import { useState } from "react"
-import Spinner from "../ui/Spinner"
 import ErrorMessage from "../ui/ErrorMessage"
 import { productSchema } from "../../validation"
 import Modal from "."
@@ -18,7 +17,7 @@ interface IProps{
 
 const NewProductModal = ({setOpen }:IProps) => {
 
-  const[submitLoad , setSubmitLoad] = useState(false)
+  const[ , setSubmitLoad] = useState(false)
   const {isLoading , data:categories} = useGetData({
     queryKey:['categories'],
     url:"products/categories"
@@ -44,7 +43,7 @@ const NewProductModal = ({setOpen }:IProps) => {
   return (
     <>
       <Modal setOpen={setOpen}>
-              <div className="relative bg-white rounded-lg shadow ">
+              <div className="relative bg-white rounded-lg shadow m-8">
                   <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
                       <h3 className="text-lg font-semibold text-gray-900 ">
                           Create New Product
@@ -83,7 +82,6 @@ const NewProductModal = ({setOpen }:IProps) => {
                           </div>
                       </div>
                       <div className={`mr-3 text-white inline-flex items-center bg-[#1fcec8] hover:bg-[#56c1bd] focus:outline-nonefont-medium rounded-lg text-sm px-5 py-2.5 text-center`}>
-                        {submitLoad && <Spinner/>}
                         <input type="submit"/>
                       </div>
                       <button onClick={()=>setOpen(false)} className="text-white inline-flex items-center bg-[#c4d4e2] hover:bg-[#8c949f] focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center">

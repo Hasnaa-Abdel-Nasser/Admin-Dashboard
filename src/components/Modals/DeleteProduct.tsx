@@ -4,7 +4,6 @@ import toast from "react-hot-toast";
 import { AxiosError } from "axios";
 import { IErrorResponse } from "../../interfaces";
 import { useState } from "react";
-import Spinner from "../ui/Spinner";
 import Modal from ".";
 
 interface IProps {
@@ -12,7 +11,7 @@ interface IProps {
   id: number;
 }
 const DeleteProduct = ({ setOpen, id }: IProps) => {
-  const [submitLoad, setSubmitLoad] = useState(false);
+  const [, setSubmitLoad] = useState(false);
 
   const handleDelete = async () => {
     setSubmitLoad(true);
@@ -33,11 +32,11 @@ const DeleteProduct = ({ setOpen, id }: IProps) => {
   return (
     <>
       <Modal setOpen={setOpen}>
-        <div className="bg-white rounded-lg shadow p-4 flex flex-col items-center justify-center gap-4">
+        <div className="bg-white rounded-lg shadow p-4 flex flex-col items-center justify-center gap-4 m-8">
           <div className="w-14 h-14 bg-red-200 flex justify-center items-center rounded-full">
             <IoWarningOutline color={"red"} size={"30px"} />
           </div>
-          <h5 className="text-xl">Are you sure?</h5>
+          <h5 className="text-xl text-slate-800">Are you sure?</h5>
           <p className="text-sm text-slate-800">
             This action will delete this product.
             <br />
@@ -48,7 +47,7 @@ const DeleteProduct = ({ setOpen, id }: IProps) => {
               onClick={() => handleDelete()}
               className="mr-3 text-white inline-flex items-center bg-[#ff4d44] hover:bg-[#d84e4e] focus:outline-nonefont-medium rounded-lg text-sm px-10 py-2.5 text-center"
             >
-              {submitLoad && <Spinner />}Yes,delete it
+            Yes,delete it
             </button>
             <button
               onClick={() => setOpen(false)}

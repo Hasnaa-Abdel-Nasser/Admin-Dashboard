@@ -15,7 +15,7 @@ const Rate = ({rate}:{rate:number}) => {
     }
     if(grayStars){
         for (let i = 0; i < grayStars; i++) {
-            stars.push(<FaStar key={i} className="text-gray-500" />);
+            stars.push(<FaStar key={i+fullStars} className="text-gray-500" />);
         }
     }
     return stars;

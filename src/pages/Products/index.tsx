@@ -6,26 +6,47 @@ import { IProduct } from "../../interfaces";
 import NewProductModal from "../../components/Modals/NewProduct";
 import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
-import { allowScroll } from "../../utils";
+import search, { allowScroll } from "../../utils";
+import Spinner from "../../components/ui/Spinner";
+import { useSearchParams } from "react-router-dom";
 
 const ProductsPage = () => {
   const [showAddModal, setShowAddModal] = useState(false);
+  const [products , setProducts] = useState<IProduct[]>([]);
+  const [searchParams] = useSearchParams(); 
+  const searchValue = searchParams.get('search');
+
+  const { isLoading, data }= useGetData({
+    queryKey: ["products"],
+    url: "products",
+  });
 
   useEffect(()=>{
     allowScroll(showAddModal);
   },[showAddModal]);
 
-  const { isLoading, data } = useGetData({
-    queryKey: ["products"],
-    url: "products",
-  });
+  useEffect(() => {
+    if (data) {
+      if (searchValue) {
+        const result = search(searchValue, data);
+        setProducts(result);
+      } else {
+        setProducts(data);
+      }
+    }
+  }, [searchValue, data]);
 
+  useEffect(()=>{
+    if (!isLoading) {
+      setProducts(data);
+    }
+  },[isLoading, data]);
   return (
-    <div className="page">
-      <div className="flex justify-between w-full">
+    <div className="w-full">
+      <div className="flex justify-between w-full flex-wrap gap-5">
         <p className="text-lg font-medium">Products</p>
         <button
-          className="bg-[#1fcec8] text-sm font-medium p-2 rounded-md flex gap-2"
+          className="bg-primary text-sm font-medium p-2 rounded-md flex gap-2"
           onClick={() => setShowAddModal(true)}
         >
           <BadgePlus size={20} strokeWidth={1.75} />
@@ -33,15 +54,14 @@ const ProductsPage = () => {
         </button>
       </div>
       {isLoading ? (
-        <p>Loading...</p>
+        <Spinner/>
       ) : (
-        <div className="cards my-5 text-start flex flex-wrap justify-evenly">
-          {data.map((product: IProduct) => 
+        <div className="flex flex-wrap gap-5 justify-evenly md:justify-around my-7">
+          {products.map((product: IProduct) => 
             <ProductCard product={product} key={product.id} />
           )}
         </div>
       )}
-
       {
         showAddModal && <NewProductModal setOpen={setShowAddModal} />
       }

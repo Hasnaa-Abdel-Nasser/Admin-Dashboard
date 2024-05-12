@@ -6,7 +6,6 @@ interface IProps {
   children: ReactNode;
 }
 const ProdectedRoute = ({ isAllowed, redirectPath, children }: IProps) => {
-  console.log(redirectPath )
   if (!isAllowed) {
     return <Navigate to={redirectPath} />;
   }
