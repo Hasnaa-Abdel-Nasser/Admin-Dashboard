@@ -18,7 +18,7 @@ export default function Table() {
   useEffect(() => {
     if (data) {
       if (searchValue) {
-        const result:IProduct[] = search(searchValue, data);
+        const result:IProduct[] = search({value:searchValue, data});
         setProducts(result);
       } else {
         setProducts(data);

@@ -26,11 +26,9 @@ const EditProductModal = ({ setOpen ,  product }: IProps) => {
   
     const { register, handleSubmit , formState:{errors}} = useForm<IFormInput>(({resolver: yupResolver(productSchema)}));
     const onSubmit: SubmitHandler<IFormInput> = async(data) => {
-      console.log(data)
       setSubmitLoad(true);
       try {
         const response = await edit({id:productValues.id,config:data});
-        console.log(response)
         if(response && response.status === 200){
           toast.success('Edit Product Successfully!',{style:{fontSize:'15px'}});
           setOpen(false);

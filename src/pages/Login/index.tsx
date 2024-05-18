@@ -17,7 +17,6 @@ const Login = () => {
   const { register, handleSubmit, formState: { errors }} = useForm<IFormInput>(({resolver: yupResolver(authSchema)}));
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     const res = await authLogin(data);
-    console.log(res)
     if(res && res.status === 200){
       location.replace("/")
     }

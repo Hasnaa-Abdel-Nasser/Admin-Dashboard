@@ -28,7 +28,7 @@ const ProductsPage = () => {
   useEffect(() => {
     if (data) {
       if (searchValue) {
-        const result = search(searchValue, data);
+        const result = search({value:searchValue, data});
         setProducts(result);
       } else {
         setProducts(data);

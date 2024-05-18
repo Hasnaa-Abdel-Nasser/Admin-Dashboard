@@ -73,8 +73,7 @@ export const logout = ()=>{
   location.replace("/login");
 }
 
-export default function search(value, data) {
-  console.log("Searching value:", value);
+export default function search({value, data}:{value:string,data:IProduct[]}) {
 
   const result :IProduct[]= data.filter((ele:IProduct) => {
     const title = isInclude({text:ele.title, value});
@@ -83,8 +82,6 @@ export default function search(value, data) {
 
     return title || category || price;
   });
-
-  console.log("Search result : ", result);
 
   return result;
 }

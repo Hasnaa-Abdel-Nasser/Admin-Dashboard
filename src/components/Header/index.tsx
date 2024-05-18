@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
-const Header = () => {
+const Header = ({className}:{className:string}) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchValue , setSearchValue] = useState("");
   const path = window.location.pathname.split("/");
@@ -27,7 +27,7 @@ const Header = () => {
         <input 
         value={searchValue}
         onChange={(event)=>handleSearchInput(event.target.value)} 
-        className='bg-[#212332] outline-none text-xs rounded-md w-80 h-7 px-3 ml-[200px]' type="text" placeholder="Search Here"/>
+        className={`bg-[#212332] outline-none text-xs rounded-md w-80 h-7 px-3 ${className}`} type="text" placeholder="Search Here"/>
       :<span className="py-3"></span>
       }
       
