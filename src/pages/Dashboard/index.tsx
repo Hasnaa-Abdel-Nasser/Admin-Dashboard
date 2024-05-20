@@ -1,11 +1,12 @@
 import Card, { IProps } from "../../components/ui/DashboardCards";
-import { cardsData } from "../../utils/dashboard.cards";
-import BasicTable from '../../components/Table'
+import { cardsData } from "../../utils";
+import Table from '../../components/Table'
 const DashboardPage = () => {
+
   return (
-    <div className="page">
+    <div className="w-full">
       <p className="text-lg font-medium">Dashboard</p>
-      <div className="w-[90%] mx-auto my-7 h-28 flex justify-between items-center gap-5">
+      <div className="w-[90%] max-md:flex-wrap max-md:h-auto mx-auto my-7 h-28 flex justify-center items-center gap-5">
         {cardsData.map((card: IProps, index) => (
           <Card
             key={index}
@@ -16,7 +17,7 @@ const DashboardPage = () => {
           />
         ))}
       </div>
-      <BasicTable/>
+      <Table/>
     </div>
   );
 };

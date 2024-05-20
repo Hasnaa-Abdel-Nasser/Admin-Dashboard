@@ -1,31 +1,71 @@
 import { BadgePlus } from "lucide-react";
-import './index.css'
+import "./index.css";
 import ProductCard from "../../components/ui/Card";
+import useGetData from "../../hooks/useGetData";
+import { IProduct } from "../../interfaces";
+import NewProductModal from "../../components/Modals/NewProduct";
+import { useEffect, useState } from "react";
+import { Toaster } from "react-hot-toast";
+import search, { allowScroll } from "../../utils";
+import Spinner from "../../components/ui/Spinner";
+import { useSearchParams } from "react-router-dom";
+
 const ProductsPage = () => {
-  const product = {
-      "id": 1,
-      "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-      "price": 109.95,
-      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-      "category": "men's clothing",
-      "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-      "rating": {
-        "rate": 3.9,
-        "count": 120
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [products , setProducts] = useState<IProduct[]>([]);
+  const [searchParams] = useSearchParams(); 
+  const searchValue = searchParams.get('search');
+
+  const { isLoading, data }= useGetData({
+    queryKey: ["products"],
+    url: "products",
+  });
+
+  useEffect(()=>{
+    allowScroll(showAddModal);
+  },[showAddModal]);
+
+  useEffect(() => {
+    if (data) {
+      if (searchValue) {
+        const result = search({value:searchValue, data});
+        setProducts(result);
+      } else {
+        setProducts(data);
       }
-  }
+    }
+  }, [searchValue, data]);
+
+  useEffect(()=>{
+    if (!isLoading) {
+      setProducts(data);
+    }
+  },[isLoading, data]);
   return (
-    <div className="page">
-      <div className='flex justify-between w-full'>
+    <div className="w-full">
+      <div className="flex justify-between w-full flex-wrap gap-5">
         <p className="text-lg font-medium">Products</p>
-        <button className="bg-[#44A5FF] text-sm font-medium p-2 rounded-md flex gap-2">
+        <button
+          className="bg-primary text-sm font-medium p-2 rounded-md flex gap-2"
+          onClick={() => setShowAddModal(true)}
+        >
           <BadgePlus size={20} strokeWidth={1.75} />
-          Add New Product
+          Add new product
         </button>
       </div>
-      <div className='cards relative my-5 text-start flex flex-wrap'>
-        <ProductCard product={product}/>
-      </div>
+      {isLoading ? (
+        <Spinner/>
+      ) : (
+        <div className="flex flex-wrap gap-5 justify-evenly md:justify-around my-7">
+          {products.map((product: IProduct) => 
+            <ProductCard product={product} key={product.id} />
+          )}
+        </div>
+      )}
+      {
+        showAddModal && <NewProductModal setOpen={setShowAddModal} />
+      }
+      <Toaster position="bottom-right" reverseOrder={false} />
     </div>
   );
 };

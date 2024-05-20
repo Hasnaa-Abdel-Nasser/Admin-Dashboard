@@ -13,7 +13,7 @@
     color: #7D7F8A;
 }
 .active{
-    background-color: rgba(68, 165, 255, 0.15);
-    color: #44A5FF;
+    background-color: rgba(68, 255, 255, 0.15);
+    color: #1fcec8;
     transition: all 0.1s ease-in;
 }

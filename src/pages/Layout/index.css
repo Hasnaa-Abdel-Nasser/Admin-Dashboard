@@ -1,0 +1,11 @@
+.page , .search{
+    margin-left:200px;
+}
+.close-page{
+    margin-left:70px;
+}
+@media screen and (max-width: 620px) {
+    .page , .search{
+        margin-left: 70px;
+    }
+}

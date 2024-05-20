@@ -1,14 +1,20 @@
-import { InputHTMLAttributes } from "react";
+import { InputHTMLAttributes, Ref, forwardRef } from "react";
 
 interface IProps extends InputHTMLAttributes<HTMLInputElement>{
-    className:string
+    className?:string
+    label?: string
 }
-export const Input = ({className , ...rest}:IProps) => {
+export const Input = forwardRef(({className , label, ...rest}:IProps , ref:Ref<HTMLInputElement>) => {
 
   return (
-      <input
+    <>
+    {
+      label &&  <label className="block mb-2 text-sm font-medium text-gray-900 ">{label}</label>
+    }
+     <input 
+        ref={ref} 
         {...rest}
-        className={`outline-none text-xs rounded-md w-80 h-7 px-3 ${className}`}
-      />
+        className={`border outline-none text-sm rounded-lg block w-full p-2.5 ${className}`}/>
+    </>
   );
-};
+},);
