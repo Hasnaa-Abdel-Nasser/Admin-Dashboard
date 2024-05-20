@@ -1,0 +1,19 @@
+.buttons{
+    display:grid;
+    justify-items: start;
+    width: 90%;
+    grid-template-columns: 25% 50%;
+    align-items: center;
+    justify-content: startw;
+    margin: 15px auto;
+    padding: 8px 0 8px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    color: #7D7F8A;
+}
+.active{
+    background-color: rgba(68, 165, 255, 0.15);
+    color: #44A5FF;
+    transition: all 0.1s ease-in;
+}
