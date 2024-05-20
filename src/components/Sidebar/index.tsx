@@ -8,7 +8,7 @@ interface IProps{
 }
 const Sidebar = ({ open, setOpen } : IProps) => {
   return (
-    <div className={`bg-[#2A2D3E] h-[100vh] fixed z-20 top-0 left-0 ease-out duration-700 w-[${open?'200px':'70px'}]`}>
+    <div className={`bg-[#2A2D3E] h-screen fixed z-20 top-0 left-0 ease-out duration-700 w-[${open?'200px':'70px'}]`}>
       {
         open ? <img src="/images/logo.png" alt="logo" className="w-[170px] m-auto" />
         : <img src="/images/icon.png" alt="logo" className="w-[65px] mx-auto mt-2" />

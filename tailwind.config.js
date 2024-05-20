@@ -11,7 +11,6 @@ export default {
       colors:{
         primary:'#1fcec8',
         darkGray:'#43475f',
-        blue:'#00192D'
       },
     },
 

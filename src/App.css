@@ -1,21 +1,18 @@
 #root {
   margin: 0;
 }
-
-@keyframes moveClockwise {
-  0% { transform: translateY(0) rotate(0deg); }
-  100% { transform: translateY(100px) rotate(360deg); }
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
 }
 
-@keyframes moveCounterclockwise {
-  0% { transform: translateY(0) rotate(0deg); }
-  100% { transform: translateY(-100px) rotate(-360deg); }
+/* Add background color to the scrollbar track */
+::-webkit-scrollbar-track {
+  background-color: #25252b;
 }
 
-.animate-moveClockwise {
-  animation: moveClockwise 2s linear infinite;
-}
-
-.animate-moveCounterclockwise {
-  animation: moveCounterclockwise 4s linear infinite;
+/* Add color to the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  background-color: #b2b2b2;
+  border-radius: 5px;
 }
