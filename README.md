@@ -2,7 +2,7 @@
 
 ## About The Project
 <p  align='center'>
- <img width="800" src="https://github.com/Hasnaa-Abdel-Nasser/Athar-API/blob/master/screen.png" alt='project' >
+ <img width="800" src="https://github.com/Hasnaa-Abdel-Nasser/Admin-Dashboard/blob/master/screen.png" alt='project' >
 </p>
 
  ### 1- Dashboard Page
